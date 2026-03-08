@@ -1,31 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle navigation active state
-    const navLinks = document.querySelectorAll('.main-nav a');
-    window.addEventListener('scroll', function() {
-        let current = '';
-        navLinks.forEach(link => {
-            const linkSection = document.querySelector(link.getAttribute('href'));
-            if (linkSection.scrollIntoView() === false) return;
-            if (linkSection.offsetTop <= (window.pageYOffset + 100) && linkSection.offsetTop + linkSection.offsetHeight > (window.pageYOffset + 100)) {
-                current = link.getAttribute('href');
-            }
-        });
-        navLinks.forEach(link => link.classList.remove('active'));
-        if (current) navLinks.forEach(link => {
-            if (link.getAttribute('href') === current) link.classList.add('active');
-        });
-    });
-
     // Smooth scrolling for navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
+
             const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            window.scrollTo({
-                top: targetSection.offsetTop - 80,
-                behavior: 'smooth'
-            });
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+
+                // Update active navigation item
+                const navLinks = document.querySelectorAll('.main-nav a');
+                navLinks.forEach(link => {
+                    link.style.color = 'var(--text-light)';
+                });
+
+                this.style.color = 'var(--primary-color)';
+            }
         });
     });
 
@@ -46,12 +41,35 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
 
-    // Highlight current section in navigation
-    window.addEventListener('load', function() {
-        const firstSection = document.querySelector('#intro');
-        if (firstSection) {
-            const firstLink = document.querySelector('.main-nav a[href="#intro"]');
-            if (firstLink) firstLink.classList.add('active');
-        }
+    // Change background color based on section
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        const sections = document.querySelectorAll('section');
+
+        sections.forEach((section, index) => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+
+            if (scrollPosition > (sectionTop - 200)) {
+                document.body.style.backgroundColor = getSectionBackgroundColor(index);
+            }
+        });
     });
+
+    function getSectionBackgroundColor(index) {
+        const sections = document.querySelectorAll('section');
+        const section = sections[index];
+
+        if (section.classList.contains('space-race-section')) {
+            return '#f0f8ff';
+        } else if (section.classList.contains('space-stations-section')) {
+            return '#e8f5e9';
+        } else if (section.classList.contains('deep-space-section')) {
+            return '#e3f2fd';
+        } else if (section.classList.contains('future-section')) {
+            return '#f3e5f5';
+        } else {
+            return '#f9f9f9';
+        }
+    }
 });
