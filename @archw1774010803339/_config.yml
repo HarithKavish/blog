@@ -1,0 +1,18 @@
+title: Grass Blog
+description: All about grass types, lawn care, and the science behind green turf
+baseurl: ""
+url: "https://harithkavish.github.io/blog"
+permalink: pretty
+
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:name/
