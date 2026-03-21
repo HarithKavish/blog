@@ -1,0 +1,33 @@
+# Jekyll configuration
+title: "Rust Tips Blog"
+description: "A collection of programming tips, tutorials, and thoughts on software development."
+baseurl: ""
+url: "https://microtest1774071908798.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Pagination
+paginate: 5
+paginate_path: "/page:num/"
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "microtest1774071908798"
