@@ -1,2 +1,6 @@
 # Crash log dropped in the working tree by the local Chromium/Electron tooling.
 debug.log
+
+# Python bytecode from tools/
+__pycache__/
+*.pyc

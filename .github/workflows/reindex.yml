@@ -1,0 +1,49 @@
+name: Reindex discover page
+
+# Blogs land here as pushed folders, from people and from agents. Nobody
+# publishing one should have to remember to regenerate the home page, so the
+# push does it for them.
+on:
+  push:
+    branches: [main]
+    # index.html is this workflow's own output. Ignoring it means the commit
+    # made below cannot trigger another run of the same workflow.
+    paths-ignore:
+      - 'index.html'
+  workflow_dispatch:
+
+concurrency:
+  group: reindex-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The indexer dates each blog from the commit that introduced it,
+          # which needs the history, not just the tip.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild the index
+        run: python tools/index_blogs.py
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No change to index.html."
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Reindex discover page'
+          git push

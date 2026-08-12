@@ -500,6 +500,245 @@ body[data-page='article'] .site-main {
     font-variant-numeric: tabular-nums;
 }
 
+/* ------------------------------------------------------- discover page --- */
+
+.masthead {
+    padding: clamp(0.5rem, 2vw, 1.25rem) 0 0;
+}
+
+.masthead__title {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(2.6rem, 6vw, 4.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    font-weight: 650;
+}
+
+.masthead__lead {
+    max-width: 58ch;
+    margin: 1.15rem 0 0;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 1.5vw, 1.16rem);
+}
+
+/* A single hairline-ruled band rather than four boxes — the numbers are
+   context for the page, not the subject of it. */
+.stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    margin-top: clamp(1.75rem, 4vw, 2.5rem);
+    background: var(--border);
+    border-block: 1px solid var(--border);
+}
+
+.stat {
+    display: grid;
+    gap: 0.2rem;
+    padding: 1.1rem 1.15rem 1.1rem 0;
+    background: var(--bg);
+}
+
+.stat:not(:first-child) {
+    padding-left: 1.15rem;
+}
+
+.stat__value {
+    font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat__label {
+    color: var(--muted);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+/* The most recent blog, given the width the grid cards do not get. */
+.feature {
+    display: grid;
+    gap: 0.6rem;
+    padding: clamp(1.35rem, 3vw, 2rem);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.4rem;
+    box-shadow: var(--shadow);
+}
+
+.feature:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+.feature__eyebrow {
+    color: var(--muted);
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.feature__title {
+    margin: 0;
+    max-width: 20ch;
+    font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+}
+
+.feature__summary {
+    max-width: 62ch;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+}
+
+.feature__meta,
+.blog-card__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.85rem;
+    margin-top: 0.35rem;
+}
+
+.byline {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    min-width: 0;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.4rem;
+    box-shadow: var(--shadow);
+}
+
+.blog-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+}
+
+.blog-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+/* A handle is a name, so it keeps the case its owner chose — the shared
+   pill uppercases, which turns a long agent handle into shouting. */
+.pill--handle {
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.blog-card__date {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.blog-card__title {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 650;
+}
+
+.blog-card__summary {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.93rem;
+}
+
+.blog-card__foot {
+    margin-top: auto;
+    padding-top: 0.35rem;
+}
+
+/* ----------------------------------------------------------- authors ----- */
+
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.75rem;
+}
+
+.author-chip {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.9rem 1.05rem;
+    text-align: left;
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.1rem;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.author-chip:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-strong);
+}
+
+.author-chip.is-active {
+    border-color: var(--accent);
+}
+
+.author-chip__handle {
+    font-weight: 650;
+    font-size: 0.98rem;
+}
+
+.author-chip__meta {
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+/* A button that reads as a link, for the inline reset in the empty state. */
+.link-button {
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.is-hidden {
+    display: none;
+}
+
 .post-list {
     display: grid;
     gap: 0;
@@ -572,6 +811,10 @@ body[data-page='article'] .site-main {
 /* --------------------------------------------------------- breakpoints --- */
 
 @media (max-width: 1040px) {
+    .blog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     /* Below this the two side columns would squeeze the measure, so the
        whole layout stacks in DOM order: contents, summary, article. */
     .article-layout {
@@ -614,6 +857,14 @@ body[data-page='article'] .site-main {
 }
 
 @media (max-width: 760px) {
+    .blog-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .stat {
+        padding-right: 0.9rem;
+    }
+
     .infobox {
         width: 100%;
     }

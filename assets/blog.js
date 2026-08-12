@@ -189,39 +189,89 @@
 
     /* ----------------------------------------------------------- filter -- */
 
+    /*
+     * One query drives the whole discover page: the search box, the author
+     * chips, the counts and the empty state. The author chips are just a
+     * shortcut that writes into the same box, so there is never a second
+     * piece of filter state to keep in sync with the first.
+     */
     (function filter() {
         var input = document.querySelector('[data-filter]');
-        var items = Array.prototype.slice.call(document.querySelectorAll('[data-search]'));
-        if (!input || !items.length) {
+        var cards = Array.prototype.slice.call(document.querySelectorAll('[data-search]'));
+        if (!input || !cards.length) {
             return;
         }
 
         var count = document.querySelector('[data-count]');
         var empty = document.querySelector('[data-empty]');
+        var chips = Array.prototype.slice.call(document.querySelectorAll('[data-author-filter]'));
+        var resets = Array.prototype.slice.call(document.querySelectorAll('[data-clear-filter]'));
+        // The feature repeats the newest blog, so it is hidden while filtering
+        // rather than shown as a second copy of a card below it.
+        var featured = document.querySelector('[data-feature-section]');
+        var total = cards.filter(function (card) {
+            return card.dataset.author;
+        }).length;
 
         function apply() {
             var query = input.value.trim().toLowerCase();
             var shown = 0;
 
-            items.forEach(function (item) {
-                var match = !query || item.dataset.search.indexOf(query) !== -1;
-                item.classList.toggle('is-hidden', !match);
-                if (match) {
+            cards.forEach(function (card) {
+                var match = !query || card.dataset.search.indexOf(query) !== -1;
+                card.classList.toggle('is-hidden', !match);
+                if (match && card.dataset.author) {
                     shown++;
                 }
             });
 
+            chips.forEach(function (chip) {
+                chip.classList.toggle(
+                    'is-active',
+                    query === chip.dataset.authorFilter.toLowerCase()
+                );
+            });
+
+            if (featured) {
+                featured.classList.toggle('is-hidden', Boolean(query));
+            }
             if (count) {
-                count.textContent = shown === items.length
-                    ? items.length + (items.length === 1 ? ' article' : ' articles')
-                    : shown + ' of ' + items.length;
+                count.textContent = query
+                    ? shown + ' of ' + total
+                    : total + (total === 1 ? ' blog' : ' blogs');
             }
             if (empty) {
                 empty.hidden = shown !== 0;
             }
+            resets.forEach(function (reset) {
+                reset.classList.toggle('is-hidden', !query);
+            });
+        }
+
+        function set(value) {
+            input.value = value;
+            apply();
         }
 
         input.addEventListener('input', apply);
+
+        chips.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                var handle = chip.dataset.authorFilter;
+                // Selecting the active author again clears it, so a chip is a
+                // toggle rather than a one-way trip.
+                set(chip.classList.contains('is-active') ? '' : handle);
+                document.getElementById('browse').scrollIntoView({ block: 'start' });
+            });
+        });
+
+        resets.forEach(function (reset) {
+            reset.addEventListener('click', function () {
+                set('');
+                input.focus();
+            });
+        });
+
         apply();
     })();
 
