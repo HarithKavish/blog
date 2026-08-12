@@ -3,136 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hosted Websites & Blogs Directory</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="A directory of the websites and blogs hosted here, and the platform features they have in common.">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#f4f9fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b1014" media="(prefers-color-scheme: dark)">
+    <meta property="og:site_name" content="Harith Kavish">
+    <meta property="og:title" content="The Sites">
+    <meta property="og:description" content="A directory of hosted websites and blogs.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://blog.harithkavish.com/the-sites/2026-03-08/21-29-53/@harithkavish/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="The Sites">
+    <meta name="twitter:description" content="A directory of hosted websites and blogs.">
+    <link rel="canonical" href="https://blog.harithkavish.com/the-sites/2026-03-08/21-29-53/@harithkavish/">
+    <link rel="icon" href="https://harithkavish.com/favicon.svg" type="image/svg+xml">
+    <!-- Shared theme from the main site, so the blog follows it automatically. -->
+    <link rel="stylesheet" href="https://harithkavish.com/style.css">
+    <link rel="stylesheet" href="/assets/blog.css">
+    <script>
+        document.documentElement.dataset.theme = localStorage.getItem('harithkavish-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    </script>
+    <title>The Sites — Harith Kavish</title>
 </head>
-<body>
-    <header class="site-header">
-        <div class="container">
-            <h1 class="logo">Hosted Websites & Blogs</h1>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#websites" class="active">Hosted Websites</a></li>
-                    <li><a href="#blogs">Hosted Blogs</a></li>
-                    <li><a href="#features">Key Features</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main class="content-container">
-        <section id="hero" class="hero-section">
-            <div class="container">
-                <h2 class="hero-title">A Comprehensive Directory of Hosted Websites and Blogs</h2>
-                <p class="hero-subtitle">Explore the platforms and blogs we host, designed for creators, businesses, and enthusiasts to share their work online.</p>
-            </div>
-        </section>
-
-        <section id="websites" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Hosted Websites</h2>
-                <div class="websites-grid">
-                    <div class="website-card">
-                        <h3 class="card-title">Tech Solutions Hub</h3>
-                        <p class="card-description">A technical resource hub covering software development, cybersecurity, and cloud computing. Ideal for developers and IT professionals seeking in-depth guides and tutorials.</p>
-                        <a href="#" class="card-link">View Website</a>
-                    </div>
-                    <div class="website-card">
-                        <h3 class="card-title">Creative Portfolio</h3>
-                        <p class="card-description">A platform showcasing digital art, graphic design, and multimedia projects. Perfect for artists and designers looking to display their work professionally.</p>
-                        <a href="#" class="card-link">View Website</a>
-                    </div>
-                    <div class="website-card">
-                        <h3 class="card-title">Educational Resources</h3>
-                        <p class="card-description">An online repository of educational materials, including lesson plans, video tutorials, and interactive tools for teachers and students.</p>
-                        <a href="#" class="card-link">View Website</a>
-                    </div>
+<body data-page="article">
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="site-header__inner">
+                <a class="brand" href="/">
+                    <img class="brand__mark" src="https://harithkavish.com/logo.png" alt="" aria-hidden="true">
+                    <span class="brand__text">
+                        <span class="brand__name">Harith Kavish</span>
+                        <span class="brand__descriptor">Blog</span>
+                    </span>
+                </a>
+                <div class="site-header__actions">
+                    <nav class="site-nav" id="primary-nav" aria-label="Primary">
+                        <a class="site-nav__link" href="/">Articles</a>
+                        <a class="site-nav__link" href="https://nexus.harithkavish.com/">Nexus</a>
+                        <a class="site-nav__link" href="https://harithkavish.com/">Main site</a>
+                    </nav>
+                    <button type="button" class="nav-toggle" data-nav-toggle="true" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+                        <span class="nav-toggle__bars" aria-hidden="true">
+                            <span class="nav-toggle__bar"></span>
+                            <span class="nav-toggle__bar"></span>
+                            <span class="nav-toggle__bar"></span>
+                        </span>
+                    </button>
+                    <button type="button" class="theme-toggle" data-theme-toggle="true" aria-label="Switch to dark mode">Dark mode</button>
                 </div>
             </div>
-        </section>
+            <div class="reading-progress" aria-hidden="true">
+                <span class="reading-progress__bar" data-progress></span>
+            </div>
+        </header>
 
-        <section id="blogs" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Hosted Blogs</h2>
-                <div class="blogs-grid">
-                    <div class="blog-card">
-                        <h3 class="card-title">Future Trends</h3>
-                        <p class="card-description">Exploring emerging technologies, business innovations, and societal shifts. A forward-thinking blog for forward-minded readers.</p>
-                        <a href="#" class="card-link">Read Blog</a>
-                    </div>
-                    <div class="blog-card">
-                        <h3 class="card-title">Sustainable Living</h3>
-                        <p class="card-description">Practical tips and insights on eco-friendly practices, sustainable living, and environmental conservation.</p>
-                        <a href="#" class="card-link">Read Blog</a>
-                    </div>
-                    <div class="blog-card">
-                        <h3 class="card-title">Travel Adventures</h3>
-                        <p class="card-description">Personal stories and recommendations from travelers around the world, featuring destinations, tips, and cultural experiences.</p>
-                        <a href="#" class="card-link">Read Blog</a>
+        <main class="site-main">
+            <article>
+                <div class="article-head">
+                    <p class="article-kicker">Directory</p>
+                    <h1 class="article-title">The Sites</h1>
+                    <p class="article-lead">A directory of the websites and blogs hosted here, and the platform features they have in common.</p>
+                    <div class="article-meta">
+                        <span>8 March 2026</span>
+                        <span>@harithkavish</span>
+                        <span data-section-count>&nbsp;</span>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="features" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Key Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3 class="feature-title">User-Friendly Interface</h3>
-                        <p class="feature-description">Intuitive design ensures that both beginners and experienced users can manage their websites and blogs effortlessly.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">Customizable Themes</h3>
-                        <p class="feature-description">Tailor your site’s appearance with a variety of themes and customization options to match your brand or personal style.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">SEO Optimization</h3>
-                        <p class="feature-description">Built-in SEO tools help improve your site’s visibility on search engines, driving organic traffic and engagement.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">24/7 Support</h3>
-                        <p class="feature-description">Dedicated support team available to assist with technical issues, content management, and platform updates.</p>
+                <div class="article-layout">
+                    <aside class="toc" aria-labelledby="contents-heading">
+                        <h2 class="toc__title" id="contents-heading">Contents</h2>
+                        <ol class="toc__list" data-toc></ol>
+                    </aside>
+
+                    <aside class="infobox" aria-label="Quick facts">
+                        <p class="infobox__title">Directory</p>
+                        <dl class="infobox__list">
+                            <div class="infobox__row">
+                                <dt>Hosted websites</dt>
+                                <dd>3</dd>
+                            </div>
+                            <div class="infobox__row">
+                                <dt>Hosted blogs</dt>
+                                <dd>3</dd>
+                            </div>
+                            <div class="infobox__row">
+                                <dt>Platform features</dt>
+                                <dd>4</dd>
+                            </div>
+                            <div class="infobox__row">
+                                <dt>Last reviewed</dt>
+                                <dd>8 March 2026</dd>
+                            </div>
+                        </dl>
+                    </aside>
+
+                    <div class="article-body prose" data-article-body>
+                        <p class="lead">This page lists the platforms and blogs hosted here — built for creators, businesses and enthusiasts who want their work online without assembling the infrastructure themselves.</p>
+
+                        <h2>Hosted websites</h2>
+                        <div class="stack">
+                            <div class="card">
+                                <h3 class="card__title">Tech Solutions Hub</h3>
+                                <p class="card__body">A technical resource hub covering software development, cybersecurity and cloud computing. Aimed at developers and IT professionals looking for in-depth guides and tutorials.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="card__title">Creative Portfolio</h3>
+                                <p class="card__body">A platform for digital art, graphic design and multimedia projects — for artists and designers who need their work presented properly.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="card__title">Educational Resources</h3>
+                                <p class="card__body">A repository of educational material: lesson plans, video tutorials and interactive tools for teachers and students.</p>
+                            </div>
+                        </div>
+
+                        <h2>Hosted blogs</h2>
+                        <div class="stack">
+                            <div class="card">
+                                <h3 class="card__title">Future Trends</h3>
+                                <p class="card__body">Emerging technologies, business innovation and the societal shifts that follow them.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="card__title">Sustainable Living</h3>
+                                <p class="card__body">Practical guidance on eco-friendly practice, sustainable living and environmental conservation.</p>
+                            </div>
+                            <div class="card">
+                                <h3 class="card__title">Travel Adventures</h3>
+                                <p class="card__body">Stories and recommendations from travellers — destinations, logistics and cultural context.</p>
+                            </div>
+                        </div>
+
+                        <h2>Platform features</h2>
+                        <div class="factbox">
+                            <div class="factbox__cell">
+                                <span class="factbox__label">Interface</span>
+                                <span class="factbox__value">Managing a site takes no prior experience.</span>
+                            </div>
+                            <div class="factbox__cell">
+                                <span class="factbox__label">Themes</span>
+                                <span class="factbox__value">Appearance is customisable to match a brand.</span>
+                            </div>
+                            <div class="factbox__cell">
+                                <span class="factbox__label">Search</span>
+                                <span class="factbox__value">SEO tooling is built in rather than bolted on.</span>
+                            </div>
+                            <div class="factbox__cell">
+                                <span class="factbox__label">Support</span>
+                                <span class="factbox__value">Available for technical and content questions.</span>
+                            </div>
+                        </div>
+
+                        <h2>Getting in touch</h2>
+                        <p>Questions about hosting, or about anything listed above, go to <a href="mailto:harithkavish40@gmail.com">harithkavish40@gmail.com</a>.</p>
+
+                        <div class="note">
+                            <p>This directory is maintained by hand. If an entry here is out of date, the address above is the fastest way to say so.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="contact" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Contact Us</h2>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject:</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message:</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
+                <div class="article-foot">
+                    <a class="button button--secondary" href="/">← All articles</a>
+                    <p class="site-footer__copy">Published 8 March 2026</p>
                 </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="site-footer__inner">
+                <p class="site-footer__copy">© <span data-year>2026</span> Harith Kavish</p>
+                <nav class="site-footer__nav" aria-label="Footer">
+                    <a class="site-nav__link" href="/">Articles</a>
+                    <a class="site-nav__link" href="https://harithkavish.com/">Home</a>
+                    <a class="site-nav__link" href="https://harithkavish.com/legal.html">Legal</a>
+                </nav>
             </div>
-        </section>
-    </main>
+        </footer>
+    </div>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2023 Hosted Websites & Blogs. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    <script src="/assets/blog.js" defer></script>
 </body>
 </html>

@@ -1,38 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog</title>
-  <meta name="description" content="Welcome to the Blog page." />
-  <style>
-    :root { color-scheme: light dark; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #f5f7fb;
-      color: #1f2937;
-    }
-    .card {
-      text-align: center;
-      padding: 2rem;
-      border-radius: 12px;
-      background: #ffffff;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      max-width: 560px;
-      width: calc(100% - 2rem);
-    }
-    h1 { margin: 0 0 0.75rem; font-size: 2rem; }
-    p { margin: 0; line-height: 1.6; color: #4b5563; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Long-form reference articles from the Harith Kavish ecosystem — written to be read, not skimmed.">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#f4f9fb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b1014" media="(prefers-color-scheme: dark)">
+    <meta property="og:site_name" content="Harith Kavish">
+    <meta property="og:title" content="Blog">
+    <meta property="og:description" content="Reference articles, written plainly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blog.harithkavish.com/">
+    <meta property="og:image" content="https://harithkavish.com/logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Blog">
+    <meta name="twitter:description" content="Reference articles, written plainly.">
+    <meta name="twitter:image" content="https://harithkavish.com/logo.png">
+    <link rel="canonical" href="https://blog.harithkavish.com/">
+    <link rel="icon" href="https://harithkavish.com/favicon.svg" type="image/svg+xml">
+    <!-- Shared theme from the main site, so the blog follows it automatically. -->
+    <link rel="stylesheet" href="https://harithkavish.com/style.css">
+    <link rel="stylesheet" href="/assets/blog.css">
+    <script>
+        document.documentElement.dataset.theme = localStorage.getItem('harithkavish-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    </script>
+    <title>Blog — Harith Kavish</title>
 </head>
-<body>
-  <main class="card">
-    <h1>Blog</h1>
-    <p>Welcome to the Blog landing page. New posts will be published here soon.</p>
-  </main>
+<body data-page="index">
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="site-header__inner">
+                <a class="brand" href="https://harithkavish.com/">
+                    <img class="brand__mark" src="https://harithkavish.com/logo.png" alt="" aria-hidden="true">
+                    <span class="brand__text">
+                        <span class="brand__name">Harith Kavish</span>
+                        <span class="brand__descriptor">Blog</span>
+                    </span>
+                </a>
+                <div class="site-header__actions">
+                    <nav class="site-nav" id="primary-nav" aria-label="Primary">
+                        <a class="site-nav__link is-active" href="/">Articles</a>
+                        <a class="site-nav__link" href="https://nexus.harithkavish.com/">Nexus</a>
+                        <a class="site-nav__link" href="https://harithkavish.com/">Main site</a>
+                    </nav>
+                    <button type="button" class="nav-toggle" data-nav-toggle="true" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu">
+                        <span class="nav-toggle__bars" aria-hidden="true">
+                            <span class="nav-toggle__bar"></span>
+                            <span class="nav-toggle__bar"></span>
+                            <span class="nav-toggle__bar"></span>
+                        </span>
+                    </button>
+                    <button type="button" class="theme-toggle" data-theme-toggle="true" aria-label="Switch to dark mode">Dark mode</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="site-main">
+            <div class="hero">
+                <p class="hero__eyebrow">Blog</p>
+                <h1 class="hero__title">Reference, written plainly.</h1>
+                <p class="hero__lead">Long-form articles on whatever is worth explaining properly — structured like an encyclopedia entry, without the clutter of one.</p>
+            </div>
+
+            <div class="index-tools">
+                <div class="search">
+                    <span class="search__glyph" aria-hidden="true"></span>
+                    <input class="search__input" type="search" data-filter placeholder="Filter articles" aria-label="Filter articles" autocomplete="off">
+                </div>
+                <p class="index-count" data-count>4 articles</p>
+            </div>
+
+            <!-- To add an article: copy one entry, point it at the new folder,
+                 and list its keywords in data-search so the filter finds it. -->
+            <div class="post-list">
+                <a class="post-item" href="/india/2026-03-09/02-13-35/@harithkavish/" data-search="india geography history culture economy south asia">
+                    <h2 class="post-item__title">India</h2>
+                    <span class="post-item__date">9 Mar 2026</span>
+                    <p class="post-item__summary">A country of seven distinct geographies, five millennia of recorded history and 1,600 living languages — surveyed from land to economy.</p>
+                    <span class="post-item__tags">
+                        <span class="pill pill--neutral">Geography</span>
+                        <span class="pill pill--neutral">History</span>
+                    </span>
+                </a>
+
+                <a class="post-item" href="/bamboo/2026-03-08/21-45-54/@harithkavish/" data-search="bamboo sustainability plants material construction textiles carbon">
+                    <h2 class="post-item__title">Bamboo</h2>
+                    <span class="post-item__date">8 Mar 2026</span>
+                    <p class="post-item__summary">A grass with the tensile strength of steel that grows 35 cm in a day — why it behaves less like a plant and more like a renewable material.</p>
+                    <span class="post-item__tags">
+                        <span class="pill pill--neutral">Botany</span>
+                        <span class="pill pill--neutral">Materials</span>
+                    </span>
+                </a>
+
+                <a class="post-item" href="/the-sites/2026-03-08/21-29-53/@harithkavish/" data-search="sites directory hosted websites blogs hosting platform">
+                    <h2 class="post-item__title">The Sites</h2>
+                    <span class="post-item__date">8 Mar 2026</span>
+                    <p class="post-item__summary">A directory of the websites and blogs hosted here, and the platform features they have in common.</p>
+                    <span class="post-item__tags">
+                        <span class="pill pill--neutral">Directory</span>
+                    </span>
+                </a>
+
+                <a class="post-item" href="/ants/2026-03-08/18-55-40/@harithkavish/" data-search="ants insects formicidae colony pheromones ecology entomology">
+                    <h2 class="post-item__title">Ants</h2>
+                    <span class="post-item__date">8 Mar 2026</span>
+                    <p class="post-item__summary">Twelve thousand species, colonies numbering in the millions, and a chemical language that coordinates all of it without anyone in charge.</p>
+                    <span class="post-item__tags">
+                        <span class="pill pill--neutral">Biology</span>
+                        <span class="pill pill--neutral">Ecology</span>
+                    </span>
+                </a>
+            </div>
+
+            <p class="index-empty" data-empty hidden>No article matches that.</p>
+        </main>
+
+        <footer class="site-footer">
+            <div class="site-footer__inner">
+                <p class="site-footer__copy">© <span data-year>2026</span> Harith Kavish</p>
+                <nav class="site-footer__nav" aria-label="Footer">
+                    <a class="site-nav__link" href="https://harithkavish.com/">Home</a>
+                    <a class="site-nav__link" href="https://harithkavish.com/status.html">Status</a>
+                    <a class="site-nav__link" href="https://harithkavish.com/legal.html">Legal</a>
+                </nav>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/assets/blog.js" defer></script>
 </body>
 </html>

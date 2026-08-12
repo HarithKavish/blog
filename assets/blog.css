@@ -1,0 +1,673 @@
+/*
+ * Blog layer for the Harith Kavish shared theme.
+ *
+ * The shared stylesheet (https://harithkavish.com/style.css) supplies every
+ * colour, the shell, the header/footer and the card system. Nothing here
+ * redefines those. This file adds only what a reading site needs and the
+ * shared theme has no opinion on: an article column, a contents rail, an
+ * infobox, and the index listing — all built from the shared tokens so the
+ * blog follows the ecosystem theme automatically, in both modes.
+ */
+
+:root {
+    /* Reading measure, kept in one place so the rail and body stay in step. */
+    --measure: 68ch;
+    --rail: 232px;
+    --rule: var(--border);
+}
+
+/* ---------------------------------------------------------------- shell -- */
+
+/* The container width is the shared theme's, deliberately — the article
+   title has to line up with the brand in the header above it. Only the top
+   padding changes, since an article leads with a masthead rather than a hero. */
+body[data-page='article'] .site-main {
+    padding-top: clamp(1.5rem, 3.5vw, 2.75rem);
+}
+
+/* A hairline of progress along the bottom edge of the sticky header — it
+   rides with the header rather than needing a fixed offset of its own.
+   Deliberately thin: it should register at the edge of vision, never
+   compete with the text. */
+.reading-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+}
+
+.reading-progress__bar {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    opacity: 0.55;
+    transition: width 90ms linear;
+}
+
+/* -------------------------------------------------------------- masthead -- */
+
+.article-head {
+    padding-bottom: 1.4rem;
+    border-bottom: 1px solid var(--rule);
+}
+
+.article-kicker {
+    margin: 0 0 0.85rem;
+    color: var(--muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.article-title {
+    margin: 0;
+    max-width: 18ch;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    font-weight: 650;
+}
+
+.article-lead {
+    max-width: var(--measure);
+    margin: 1rem 0 0;
+    color: var(--muted);
+    font-size: clamp(1.02rem, 1.4vw, 1.16rem);
+}
+
+/* Byline facts read as one line of small caps-ish metadata, separated by
+   hairline dividers rather than punctuation. */
+.article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem 0.9rem;
+    margin-top: 1.15rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.article-meta > * + *::before {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 0.85em;
+    margin-right: 0.9rem;
+    vertical-align: -0.1em;
+    background: var(--border);
+}
+
+/* -------------------------------------------------------------- layout --- */
+
+/*
+ * Three tracks: contents, the text, and the summary box. Giving the infobox
+ * a column of its own — rather than floating it into the text, as Wikipedia
+ * does — means the reading measure never shrinks to accommodate it, and the
+ * whole arrangement collapses in DOM order on a narrow screen.
+ */
+.article-layout {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, var(--measure)) auto;
+    gap: clamp(1.75rem, 3.5vw, 3rem);
+    align-items: start;
+    margin-top: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.toc {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.infobox {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.article-body {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+}
+
+/* --------------------------------------------------------------- rail ---- */
+
+.toc {
+    position: sticky;
+    top: 5.5rem;
+    min-width: 0;
+    align-self: start;
+    max-height: calc(100vh - 7.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Structure carried by a single rule, not a box — the Wikipedia contents
+       panel without the panel. */
+    border-left: 1px solid var(--rule);
+    padding-left: 1rem;
+}
+
+.toc__title {
+    margin: 0 0 0.75rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.toc__list {
+    counter-reset: toc;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.toc__item--sub {
+    padding-left: 1rem;
+}
+
+.toc__link {
+    display: block;
+    padding: 0.3rem 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.35;
+}
+
+/* Section numbers, tabular so they align down the rail. */
+.toc__item--top > .toc__link::before {
+    counter-increment: toc;
+    content: counter(toc);
+    display: inline-block;
+    width: 1.5rem;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.78rem;
+    opacity: 0.6;
+}
+
+.toc__link:hover {
+    color: var(--text);
+}
+
+.toc__link.is-active {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------- prose --- */
+
+.prose {
+    font-size: 1.02rem;
+}
+
+.prose > :first-child {
+    margin-top: 0;
+}
+
+.prose p {
+    margin: 0 0 1.05rem;
+}
+
+/* The opening paragraph carries a little more weight, the way an
+   encyclopedia lead does, without changing typeface. */
+.prose .lead {
+    font-size: 1.12rem;
+    line-height: 1.62;
+}
+
+/* The one borrowed Wikipedia signature: a section rule the full width of the
+   column. Hairline and generous above, so it separates rather than divides. */
+.prose h2 {
+    margin: 2.6rem 0 1.05rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 650;
+    scroll-margin-top: 6rem;
+}
+
+.prose h3 {
+    margin: 1.9rem 0 0.6rem;
+    font-size: 1.06rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 650;
+    scroll-margin-top: 6rem;
+}
+
+/* Components borrowed from the shared theme keep their own spacing when they
+   are dropped into an article. */
+.prose .card__title,
+.prose .panel__title {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+.prose .stack,
+.prose .card-grid,
+.prose .panel-grid {
+    margin: 1.35rem 0;
+}
+
+.prose ul,
+.prose ol {
+    margin: 0 0 1.05rem;
+    padding-left: 1.15rem;
+    color: var(--text);
+}
+
+.prose li {
+    margin-bottom: 0.4rem;
+}
+
+.prose li::marker {
+    color: var(--muted);
+}
+
+/* Links stay underlined in running text — the shared theme strips underlines
+   globally, which is right for navigation and wrong inside prose. Scoped to
+   the text elements so shared components dropped into an article (buttons,
+   card links) keep their own treatment. */
+.prose p a,
+.prose li a,
+.prose blockquote a,
+.prose figcaption a {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-color: var(--border);
+}
+
+.prose p a:hover,
+.prose li a:hover {
+    text-decoration-color: currentColor;
+}
+
+.prose strong {
+    font-weight: 650;
+}
+
+.prose figure {
+    margin: 1.6rem 0;
+}
+
+.prose img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 1.1rem;
+}
+
+.prose figcaption {
+    margin-top: 0.6rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.prose blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1.05rem;
+    border-left: 2px solid var(--border);
+    color: var(--muted);
+}
+
+/* ------------------------------------------------------------- infobox --- */
+
+/* Wikipedia's infobox, reduced to the theme's card: a summary that sits
+   beside the lead on a wide screen and above it on a narrow one. */
+.infobox {
+    width: 17.5rem;
+    max-width: 100%;
+    padding: 1.1rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1.4rem;
+    box-shadow: var(--shadow);
+    font-size: 0.88rem;
+}
+
+.infobox__title {
+    margin: 0 0 0.85rem;
+    font-size: 0.72rem;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+}
+
+.infobox__list {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+}
+
+.infobox__row {
+    display: grid;
+    gap: 0.1rem;
+}
+
+.infobox__row + .infobox__row {
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--border);
+}
+
+.infobox dt {
+    color: var(--muted);
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.infobox dd {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* ----------------------------------------------------------- key facts --- */
+
+/* For the short label/value runs that these articles end on. */
+.factbox {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    margin: 1.35rem 0;
+    /* One shared hairline grid: the gap is the border. */
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 1.4rem;
+    overflow: hidden;
+}
+
+.factbox__cell {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.95rem 1.1rem;
+    background: var(--surface-strong);
+}
+
+.factbox__label {
+    color: var(--muted);
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.factbox__value {
+    font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------- notes --- */
+
+.note {
+    margin: 1.5rem 0;
+    padding: 1rem 1.15rem;
+    background: var(--surface-soft);
+    border: 1px solid var(--border);
+    border-radius: 1.1rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.note > :last-child {
+    margin-bottom: 0;
+}
+
+/* --------------------------------------------------------- article foot -- */
+
+.article-foot {
+    max-width: var(--measure);
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-top: 1.35rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* --------------------------------------------------------------- index --- */
+
+.index-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.6rem;
+}
+
+.search {
+    position: relative;
+    flex: 1 1 22rem;
+    min-width: 0;
+}
+
+.search__input {
+    width: 100%;
+    padding: 0.72rem 1rem 0.72rem 2.5rem;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    box-shadow: var(--shadow);
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.search__input::placeholder {
+    color: var(--muted);
+}
+
+.search__input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: var(--shadow-strong);
+}
+
+/* The magnifier drawn from two shapes, so the page carries no icon asset. */
+.search__glyph {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    width: 0.72rem;
+    height: 0.72rem;
+    margin-top: -0.42rem;
+    border: 1.5px solid var(--muted);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.search__glyph::after {
+    content: '';
+    position: absolute;
+    top: 70%;
+    left: 70%;
+    width: 0.34rem;
+    height: 1.5px;
+    background: var(--muted);
+    border-radius: 999px;
+    transform: rotate(45deg);
+    transform-origin: left center;
+}
+
+.index-count {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.post-list {
+    display: grid;
+    gap: 0;
+    margin-top: 1.75rem;
+    border-top: 1px solid var(--rule);
+}
+
+/* Entries read as an index, not a wall of cards: a rule between each, the
+   title leading, the summary quiet beneath it. */
+.post-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.4rem 1.5rem;
+    padding: 1.35rem 1rem 1.35rem 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 1rem;
+}
+
+.post-item:hover {
+    background: var(--surface-soft);
+}
+
+.post-item__title {
+    margin: 0;
+    font-size: 1.22rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 650;
+}
+
+.post-item__date {
+    grid-column: 2;
+    grid-row: 1;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.post-item__summary {
+    grid-column: 1 / -1;
+    max-width: 70ch;
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.post-item__tags {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+}
+
+.post-item.is-hidden {
+    display: none;
+}
+
+.index-empty {
+    margin: 1.75rem 0 0;
+    color: var(--muted);
+}
+
+.index-empty[hidden] {
+    display: none;
+}
+
+/* --------------------------------------------------------- breakpoints --- */
+
+@media (max-width: 1040px) {
+    /* Below this the two side columns would squeeze the measure, so the
+       whole layout stacks in DOM order: contents, summary, article. */
+    .article-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+
+    .toc,
+    .infobox,
+    .article-body {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .toc {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        padding: 1rem 1.15rem;
+        border: 1px solid var(--border);
+        border-radius: 1.4rem;
+        background: var(--surface);
+    }
+
+    .toc__list {
+        columns: 2;
+        column-gap: 1.5rem;
+    }
+
+    .toc__item {
+        break-inside: avoid;
+    }
+
+    /* Stacked, the contents sits between the reader and the article, so it
+       drops to section level — the granularity that is actually useful for
+       jumping around on a small screen. */
+    .toc__item--sub {
+        display: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .infobox {
+        width: 100%;
+    }
+
+    .toc__list {
+        columns: 1;
+    }
+
+    .post-item {
+        grid-template-columns: minmax(0, 1fr);
+        padding-right: 0.9rem;
+    }
+
+    .post-item__date {
+        grid-column: 1;
+        grid-row: auto;
+        order: 3;
+        margin-top: 0.6rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .article-title {
+        max-width: 100%;
+        font-size: clamp(2.1rem, 11vw, 2.9rem);
+    }
+
+    .factbox {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+/* Every transform and scroll animation here is decorative; honour the
+   system preference and drop them. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .reading-progress__bar {
+        transition: none;
+    }
+}
+
+@media print {
+    .site-header,
+    .site-footer,
+    .reading-progress,
+    .toc,
+    .index-tools {
+        display: none;
+    }
+
+    .article-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
