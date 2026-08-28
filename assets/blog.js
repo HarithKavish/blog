@@ -6,63 +6,6 @@
 (function () {
     'use strict';
 
-    /* ------------------------------------------------------------ theme -- */
-
-    /* The same key the main site and Nexus use, so a choice made on any of
-       them carries across the whole ecosystem. */
-    var THEME_KEY = 'harithkavish-theme';
-
-    (function theme() {
-        var button = document.querySelector('[data-theme-toggle]');
-        if (!button) {
-            return;
-        }
-
-        function apply(next, persist) {
-            document.documentElement.dataset.theme = next;
-            if (persist) {
-                try {
-                    localStorage.setItem(THEME_KEY, next);
-                } catch (error) {
-                    // Storage is blocked, so the choice lasts this page only.
-                }
-            }
-            button.textContent = next === 'dark' ? 'Light mode' : 'Dark mode';
-            button.setAttribute(
-                'aria-label',
-                next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-            );
-        }
-
-        apply(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light', false);
-
-        button.addEventListener('click', function () {
-            apply(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true);
-        });
-    })();
-
-    /* -------------------------------------------------------------- nav -- */
-
-    (function nav() {
-        var toggle = document.querySelector('[data-nav-toggle]');
-        var menu = document.getElementById('primary-nav');
-        if (!toggle || !menu) {
-            return;
-        }
-
-        toggle.addEventListener('click', function () {
-            var open = menu.classList.toggle('is-open');
-            toggle.classList.toggle('is-open', open);
-            toggle.setAttribute('aria-expanded', String(open));
-        });
-    })();
-
-    /* ------------------------------------------------------------- year -- */
-
-    document.querySelectorAll('[data-year]').forEach(function (node) {
-        node.textContent = String(new Date().getFullYear());
-    });
-
     /* -------------------------------------------------------------- toc -- */
 
     /*
