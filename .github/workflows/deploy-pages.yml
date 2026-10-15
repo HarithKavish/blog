@@ -28,6 +28,22 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The indexer dates each blog from the commit that introduced it, which needs
+          # the history, not just the tip.
+          fetch-depth: 0
+
+      # The discover page is rebuilt here, into what gets published, rather than
+      # committed back to main: main accepts changes only through pull requests, from
+      # anyone (standards/BRANCHING.md, no bypass), so a workflow that pushed the index
+      # would be refused. Publishing it straight from the build also means the live page
+      # can never lag a merge. This replaces reindex.yml.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild the discover page
+        run: python tools/index_blogs.py
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
